@@ -1,0 +1,104 @@
+.editor {
+    height: calc(100% - 16px);
+    position: relative;
+    background: #333c4a;
+    padding: 8px;
+    transition: flex-basis .2s, margin .2s;
+    flex: 0 0 0;
+    margin-right: -20px;
+    overflow-x: hidden;    
+    display: flex;
+    flex-direction: column;
+}
+
+.editor.open {
+    flex-basis: 33vw;
+    margin: 0;
+}
+
+.editor > * {
+    width: calc(33vw - 16px);
+}
+
+.editor dl {
+    width: 100%;
+}
+
+.editor .texture-preview {
+    display: inline-flex;
+    align-items: center;
+    width: 150px;
+    margin-top: 8px;
+}
+
+.editor .texture-preview span {
+    flex-grow: 1;
+}
+
+.editor .texture-preview img {
+    background-color: initial;
+    width: 60px;
+    height: 60px;
+}
+
+.editor textarea {
+    background: #242a33;
+    border-radius: 4px;
+    flex-grow: 1000000;
+    min-height: 50%;
+    font-family: "Roboto Mono";
+}
+
+.editor button {
+    padding: 8px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.editor .spacer {
+    flex-grow: 1;
+}
+
+.editor ul {
+    padding: 0;
+    display: inline;
+    font-weight: bold;
+    list-style: none;
+    text-align: center;
+}
+
+.editor ul:not(.browser-default) {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.editor ul:not(.browser-default) li {
+    list-style-type: none;
+}
+
+.editor ul li {
+    vertical-align: middle;
+    white-space: nowrap;
+    padding-right: 8px;
+    padding-left: 8px;
+    display: inline;
+}
+
+.editor-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #242a33;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow: 3px 4px 5px black;
+    color: #ffab40;
+    cursor: pointer;
+    white-space: nowrap;
+    width: unset;
+    transition: right .2s;
+}
+
+.editor.open ~ .editor-toggle {
+    right: calc(33vw + 16px + 10px);
+}

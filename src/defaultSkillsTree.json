@@ -1,0 +1,123 @@
+{
+	"types": {
+		"+armor": {
+			"texture": "red_01",
+			"tooltip": "+1 Armor"
+		},
+		"+gold": {
+			"texture": "gray_07",
+			"tooltip": "+5 Gold"
+		},
+		"+speed": {
+			"texture": "addon_09",
+			"tooltip": "+1 Speed"
+		},
+		"+damage": {
+			"texture": "yellow_10",
+			"tooltip": "+3 Damage"
+		}
+	},
+	"disconnected": [
+		{
+			"types": [ "armorspecial" ],
+			"tooltip": "50% more Armor",
+			"texture": "r43",
+			"scale": 1.8,
+			"position": { "x": 0, "y": -900 },
+			"requirementType": "bigarmor",
+			"requirementAmount": 6
+		}
+	],
+	"tree": {
+		"texture": "red_27",
+		"tooltip": "Skill Tree",
+		"scale": 1.3,
+		"children": [
+			{
+				"line": "straight",
+				"offset": { "x": 150, "y": 150 },
+				"types": [ "+armor" ],
+				"children": [
+					{
+						"line": "circle",
+						"offset": { "x": 300, "y": 300 },
+						"radius": 150,
+						"startAngle": 225,
+						"segmentAngle": 90,
+						"children": [
+							{ "types": [ "+armor" ] },
+							{ "types": [ "+armor" ] },
+							{ "types": [ "+armor" ] },
+							{
+								"types": [ "+armor" ],
+								"children": [
+									{
+										"line": "straight",
+										"offset": { "x": 110, "y": -110 },
+										"types": [ "+armor" ]
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"line": "straight",
+				"offset": { "x": -150, "y": 150 },
+				"types": [ "+gold" ],
+				"children": [
+					{
+						"line": "circle",
+						"offset": { "x": -300, "y": 300 },
+						"radius": 150,
+						"startAngle": -45,
+						"segmentAngle": 120,
+						"children": [
+							{ "types": [ "+gold" ] },
+							{
+								"types": [ "+gold" ],
+								"children": [
+									{
+										"line": "straight",
+										"offset": { "x": 150, "y": 150 },
+										"types": [ "+gold" ]
+									}
+								]
+							},
+							{ "types": [ "+gold" ] }
+						]
+					}
+				]
+			},
+			{
+				"line": "straight",
+				"offset": { "x": 150, "y": -150 },
+				"types": [ "+speed" ],
+				"children": []
+			},
+			{
+				"line": "straight",
+				"offset": { "x": -150, "y": -150 },
+				"types": [ "+damage" ],
+				"children": []
+			},
+			{
+				"line": "circle",
+				"offset": { "x": 0, "y": -900 },
+				"radius": 450,
+				"startAngle": 90,
+				"segmentAngle": -45,
+				"children": [
+					{ "types": [ "+armor", "bigarmor" ] },
+					{ "types": [ "+armor", "bigarmor" ] },
+					{ "types": [ "+armor", "bigarmor" ] },
+					{ "types": [ "+armor", "bigarmor" ] },
+					{ "types": [ "+armor", "bigarmor" ] },
+					{ "types": [ "+armor", "bigarmor" ] },
+					{ "types": [ "+armor", "bigarmor" ] }
+				]
+			}
+		]
+	}
+}

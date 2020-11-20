@@ -1,0 +1,30 @@
+.tooltip {
+	position: absolute;
+    background: black;
+    padding: 0;
+    transform: translate(-50%, calc(-100% - 12px));
+    font-size: large;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.25s, padding .25s cubic-bezier(0.68, -0.55, 0.27, 2.5);
+    pointer-events: none;
+    min-width: 40px;
+}
+
+.tooltip.active {
+    opacity: 1;
+    padding: 8px;
+}
+
+.tooltip::before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 12px solid black;
+    left: calc(50% - 12px);
+    top: 100%;
+}

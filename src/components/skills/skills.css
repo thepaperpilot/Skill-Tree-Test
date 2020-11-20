@@ -1,0 +1,11 @@
+.points-display {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: xx-large;
+    background: #242a33;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow: 3px 4px 5px black;
+}
