@@ -6,6 +6,7 @@ import { Sprite, Container } from 'react-pixi-fiber'
 import textures from './SkillTextures'
 import SkillLinkStraight from './SkillLinkStraight'
 import SkillLinkArc from './SkillLinkArc'
+import Particles from '../canvas/Particles'
 import Tooltip from '../ui/Tooltip'
 import { unlockSkill } from '../../redux/skills'
 
@@ -13,8 +14,15 @@ import { CanvasReduxContext } from '../canvas/Canvas'
 import { ViewportContext } from '../canvas/Viewport'
 
 import SkillBorder from '../../sprites/skillBorder.png'
+import Particle from '../../sprites/particle.png'
+import Fire from '../../sprites/Fire.png'
+
+import PurchaseParticles from '../../particles/purchase.json'
+import AvailableParticles from '../../particles/available.json'
 
 const SkillBorderTexture = Texture.from(SkillBorder)
+const ParticleTexture = Texture.from(Particle)
+const FireTexture = Texture.from(Fire)
 
 function SkillNodeChildren({ children, available, types, path }) {
     return children ? children.map((child, j) => {
@@ -111,16 +119,19 @@ class SkillNode extends PureComponent {
     componentDidMount() {
         // Wait so this.viewport has a valid value and the container's position has been set
         setTimeout(() => {
-            this.tooltip.current.init(this.viewport.current.viewport.current)
+            if (this.tooltip.current)
+                this.tooltip.current.init(this.viewport.current.viewport.current)
+            else
+                this.componentDidMount()
         }, 10)
     }
 
     onPointerOver = () => this.tooltip.current.onPointerOver()
     onPointerOut = () => this.tooltip.current.onPointerOut()
-    onClick = () => { if (this.props.available && !this.props.data.get('unlocked')) this.props.dispatch(unlockSkill(this.props.path)) }
+    onClick = () => { if (this.props.available && !this.props.data.get('unlocked') && this.props.points >= this.props.data.get('cost', 1)) this.props.dispatch(unlockSkill(this.props.path)) }
 
     render() {
-        const { x, y, types, path } = this.props
+        const { x, y, types, path, points, available } = this.props
 
         let data = new Map()
         this.props.data.get('types', []).map(type => types.get(type)).forEach(archetype =>
@@ -128,7 +139,8 @@ class SkillNode extends PureComponent {
         data = data.merge(this.props.data)
         const scale = data.get('scale')
         const unlocked = data.get('unlocked')
-        const tint = this.props.available || unlocked ? "0xFFFFFF" : "0x666666"
+        const tint = available || unlocked ? "0xFFFFFF" : "0x666666"
+        const purchasable = available && !unlocked && points >= data.get('cost', 1)
 
         return (
             <Container x={x || 0} y={-y || 0} ref={this.container}>
@@ -137,17 +149,25 @@ class SkillNode extends PureComponent {
                 </ViewportContext.Consumer>
                 <SkillNodeChildren children={data.get('children')} types={types}
                     available={unlocked} path={path} />
+                <Particles scale={scale || 1} textures={[ParticleTexture, FireTexture]} config={AvailableParticles} play={purchasable ? 1 : null} />
                 <Sprite texture={textures[data.get('texture')]} anchor={[.5, .5]}
                     width={75 * (scale || 1)} height={75 * (scale || 1)} tint={tint} />
                 <Sprite texture={SkillBorderTexture} anchor={[.5, .5]} width={90 * (scale || 1)}
                     height={90 * (scale || 1)} interactive tint={tint} buttonMode click={this.onClick}
                     pointerover={this.onPointerOver} pointerout={this.onPointerOut} defaultCursor={'pointer'} />
                 <SkillNodeTooltip ref={this.tooltip} tooltip={data.get('tooltip')} container={this.container} />
+                <Particles scale={scale || 1} textures={[ParticleTexture]} config={PurchaseParticles} play={unlocked ? 1 : null} />
             </Container>
         )
     }
 }
 
-const ConnectedSkillNode = connect(null, null, null, { context: CanvasReduxContext })(SkillNode)
+function mapStateToProps(state) {
+    return {
+        points: state.getIn(['skills', 'points'])
+    }
+}
+
+const ConnectedSkillNode = connect(mapStateToProps, null, null, { context: CanvasReduxContext })(SkillNode)
 
 export default ConnectedSkillNode
