@@ -128,7 +128,10 @@ class SkillNode extends PureComponent {
 
     onPointerOver = () => this.tooltip.current.onPointerOver()
     onPointerOut = () => this.tooltip.current.onPointerOut()
-    onClick = () => { if (this.props.available && !this.props.data.get('unlocked') && this.props.points >= this.props.data.get('cost', 1)) this.props.dispatch(unlockSkill(this.props.path)) }
+    onClick = () => {
+        if (this.props.available && !this.props.data.get('unlocked') && this.props.points >= this.props.data.get('cost', 1))
+            this.props.dispatch(unlockSkill(this.props.path))
+    }
 
     render() {
         const { x, y, types, path, points, available } = this.props
@@ -149,14 +152,16 @@ class SkillNode extends PureComponent {
                 </ViewportContext.Consumer>
                 <SkillNodeChildren children={data.get('children')} types={types}
                     available={unlocked} path={path} />
-                <Particles scale={scale || 1} textures={[ParticleTexture, FireTexture]} config={AvailableParticles} play={purchasable ? 1 : null} />
+                <Particles scale={scale || 1} textures={[ParticleTexture, FireTexture]}
+                    config={AvailableParticles} play={purchasable ? 1 : null} />
                 <Sprite texture={textures[data.get('texture')]} anchor={[.5, .5]}
                     width={75 * (scale || 1)} height={75 * (scale || 1)} tint={tint} />
-                <Sprite texture={SkillBorderTexture} anchor={[.5, .5]} width={90 * (scale || 1)}
-                    height={90 * (scale || 1)} interactive tint={tint} buttonMode click={this.onClick}
+                <Sprite texture={SkillBorderTexture} anchor={[.5, .5]} width={90 * (scale || 1)} click={this.onClick}
+                    height={90 * (scale || 1)} interactive tint={tint} buttonMode tap={this.onClick} touchstart={e => e.stopPropagation()}
                     pointerover={this.onPointerOver} pointerout={this.onPointerOut} defaultCursor={'pointer'} />
                 <SkillNodeTooltip ref={this.tooltip} tooltip={data.get('tooltip')} container={this.container} />
-                <Particles scale={scale || 1} textures={[ParticleTexture]} config={PurchaseParticles} play={unlocked ? 1 : null} />
+                <Particles scale={scale || 1} textures={[ParticleTexture]} config={PurchaseParticles}
+                    play={unlocked ? 1 : null} />
             </Container>
         )
     }

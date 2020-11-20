@@ -11,6 +11,7 @@ const behavior = {
             interaction: app.renderer.plugins.interaction
         })
             .drag()
+            .pinch()
             .wheel()
             .clampZoom({
                 minWidth: 1,
@@ -28,8 +29,16 @@ const behavior = {
             })
             v.input.down(e)
         })
+        v.on('touchstart', e => {
+            e.data.originalEvent = Object.assign({}, e.data.originalEvent, {
+                button: 0
+            })
+            v.input.down(e)
+        })
         v.on('rightup', v.input.up, v.input)
+        v.on('touchend', v.input.up, v.input)
         v.on('rightclick', () => v.plugins.plugins.drag.last = false)
+        v.on('tap', () => v.plugins.plugins.drag.last = false)
 
         v.on('moved', (...args) => app.renderer.render(app.stage))
 
