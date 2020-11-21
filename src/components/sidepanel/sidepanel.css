@@ -1,0 +1,74 @@
+.sidepanel {
+    height: calc(100% - 16px);
+    position: relative;
+    background: #333c4a;
+    padding: 8px;
+    transition: flex-basis .2s, margin .2s;
+    flex: 0 0 0;
+    margin-right: -20px;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidepanel.open {
+    flex-basis: 33vw;
+    margin: 0;
+}
+
+.sidepanel > * {
+    width: calc(33vw - 16px);
+}
+
+.sidepanel-toggles {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: unset;
+    transition: right .2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidepanel-toggles button {
+    background: #242a33;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow: 3px 4px 5px black;
+    color: #ffab40;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.sidepanel.open ~ .sidepanel-toggles {
+    right: calc(33vw + 16px + 10px);
+}
+
+.sidepanel .spacer {
+    flex-grow: 1;
+}
+
+.sidepanel ul {
+    padding: 0;
+    display: inline;
+    font-weight: bold;
+    list-style: none;
+    text-align: center;
+}
+
+.sidepanel ul:not(.browser-default) {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.sidepanel ul:not(.browser-default) li {
+    list-style-type: none;
+}
+
+.sidepanel ul li {
+    vertical-align: middle;
+    white-space: nowrap;
+    padding-right: 8px;
+    padding-left: 8px;
+    display: inline;
+}

@@ -128,7 +128,7 @@ class SkillNode extends PureComponent {
     isAvailable = memoize((available, data, summary) => {
         const requirementType = data.get('requirementType')
         if (requirementType)
-            return console.log(summary, data) || summary.get(requirementType, 0) >= data.get('requirementAmount', 1)
+            return summary.get(requirementType, 0) >= data.get('requirementAmount', 1)
         return available
     })
     isAffordable = memoize((available, points, data, summary) =>

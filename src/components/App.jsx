@@ -1,12 +1,12 @@
 import React from 'react'
 import SkillTree from './skills/SkillTree'
-import EditorPanel from './editor/EditorPanel'
+import SidePanel from './sidepanel/SidePanel'
 
 function App() {
   return (
     <div className="App">
         <SkillTree />
-        <EditorPanel />
+        <SidePanel />
     </div>
   )
 }

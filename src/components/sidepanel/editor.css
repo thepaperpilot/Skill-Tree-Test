@@ -1,0 +1,31 @@
+.editor .texture-preview {
+    display: inline-flex;
+    align-items: center;
+    width: 150px;
+    margin-top: 8px;
+}
+
+.editor .texture-preview span {
+    flex-grow: 1;
+    user-select: all;
+}
+
+.editor .texture-preview img {
+    background-color: initial;
+    width: 60px;
+    height: 60px;
+}
+
+.editor textarea {
+    background: #242a33;
+    border-radius: 4px;
+    flex-grow: 1000000;
+    min-height: 50%;
+    font-family: "Roboto Mono";
+}
+
+.editor button {
+    padding: 8px;
+    text-align: center;
+    margin: 10px 0;
+}
