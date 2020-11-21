@@ -36,12 +36,10 @@ const behavior = {
     customDisplayObject: ({ app }) => {
         const instance = new particles.LinkedListContainer()
         instance.app = app
-        console.log(instance)
         return instance
     },
     customApplyProps: (instance, oldProps, newProps) => {
         if (!compareArrays(oldProps.textures, newProps.textures) || oldProps.config !== newProps.config) {
-            console.log(instance, instance.emitter, oldProps, newProps)
             if (instance.emitter) instance.removeChild(instance.emitter)
             instance.emitter = new particles.Emitter(instance, newProps.textures, newProps.config)
             instance.emitter.emit = false
@@ -51,7 +49,6 @@ const behavior = {
                 instance.emitter.playOnce()
             else {
                 instance.emitter.emit = false
-                console.log(newProps.play, instance.emitter, instance.emitter.emit)
             }
         }
         instance.scale.set(newProps.scale || 1, newProps.scale || 1)

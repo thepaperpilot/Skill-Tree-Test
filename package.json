@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.1.2",
     "@testing-library/user-event": "^12.2.2",
     "immutable": "^4.0.0-rc.12",
+    "memoize-one": "^5.1.1",
     "pixi-particles": "^4.3.0",
     "pixi-viewport": "^4.17.1",
     "pixi.js": "^5.3.3",

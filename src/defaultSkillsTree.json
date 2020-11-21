@@ -21,11 +21,11 @@
 		{
 			"types": [ "armorspecial" ],
 			"tooltip": "50% more Armor",
-			"texture": "r43",
+			"texture": "addon_21",
 			"scale": 1.8,
 			"position": { "x": 0, "y": -900 },
 			"requirementType": "bigarmor",
-			"requirementAmount": 6
+			"requirementAmount": 7
 		}
 	],
 	"tree": {

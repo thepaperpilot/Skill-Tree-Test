@@ -9,7 +9,12 @@ class SkillTree extends PureComponent {
 		return (
 			<React.Fragment>
 				<Canvas>
-					<SkillNode data={this.props.tree} types={this.props.types} available={true} path={[]} />
+					{this.props.disconnected.map((node, i) =>
+						<SkillNode key={i} data={node} types={this.props.types} available={true} path={['d', i]}
+							x={node.getIn(['position', 'x'])} y={node.getIn(['position', 'y'])} />
+					)}
+					<SkillNode data={this.props.tree} types={this.props.types} available={true} path={[]}
+						x={this.props.tree.offset && this.props.tree.offset.x} y={this.props.tree.offset && this.props.tree.offset.y} />
 				</Canvas>
 				<div className="points-display">{this.props.points} points</div>
 			</React.Fragment>
@@ -20,6 +25,7 @@ class SkillTree extends PureComponent {
 function mapStateToProps(state) {
 	return {
 		tree: state.getIn(['skills', 'tree']),
+		disconnected: state.getIn(['skills', 'disconnected']),
 		types: state.getIn(['skills', 'types']),
 		points: state.getIn(['skills', 'points'])
 	}

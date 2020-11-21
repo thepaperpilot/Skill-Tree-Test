@@ -33,6 +33,7 @@
 
 .editor .texture-preview span {
     flex-grow: 1;
+    user-select: all;
 }
 
 .editor .texture-preview img {
